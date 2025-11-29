@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyKyivBot | Documentation</title>
+    <link rel="stylesheet" href="kyiv.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="back-link"><i class="ri-arrow-left-line"></i> Back to Portfolio</a>
+        <div class="project-tag">MyKyivBot v2.0</div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">🌰</div>
+            <h1>MyKyivBot</h1>
+            <p class="subtitle">Твій персональний асистент у Києві. Автоматичний моніторинг світла, погода та дозвілля.</p>
+            <div class="tech-badges">
+                <span>Aiogram 3</span>
+                <span>Telethon (MTProto)</span>
+                <span>WeatherAPI</span>
+                <span>AsyncIO</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section class="doc-section">
+            <h2>💡 Про Проект</h2>
+            <p>
+                <strong>MyKyivBot</strong> — це комплексне рішення для жителів столиці. Бот агрегує найважливішу інформацію в одному інтерфейсі, позбавляючи необхідності підписуватись на десятки каналів.
+                Головна "фішка" — це отримання актуальних графіків відключень світла безпосередньо з першоджерела (ДТЕК) без затримок.
+            </p>
+        </section>
+
+        <section class="doc-section">
+            <h2>📱 Функціонал Меню</h2>
+            <p>Інтерактивне меню бота складається з наступних розділів:</p>
+            
+            <div class="menu-grid">
+                <div class="menu-item-card">
+                    <div class="btn-preview">🚨 Графіки Відключень</div>
+                    <h3>Моніторинг Електроенергії</h3>
+                    <p>
+                        Бот використовує бібліотеку <code>Telethon</code> (клієнт Telegram API), щоб моніторити офіційний канал ДТЕК Київські Електромережі.
+                    </p>
+                    <ul>
+                        <li>🔍 <strong>Парсинг:</strong> Скрипт сканує останні 40 повідомлень каналу.</li>
+                        <li>🖼️ <strong>OCR/Image:</strong> Знаходить зображення з ключовою фразою "графіки відключень".</li>
+                        <li>⚡ <strong>Результат:</strong> Надсилає актуальну картинку з розкладом прямо в чат.</li>
+                    </ul>
+                </div>
+
+                <div class="menu-item-card">
+                    <div class="btn-preview">🌧️ Погода в Києві</div>
+                    <h3>Погодний Асистент</h3>
+                    <p>Інтеграція з <strong>WeatherAPI</strong> для надання точного прогнозу в реальному часі.</p>
+                    <div class="response-example">
+                        🌧️ <b>Погода в Києві зараз</b><br>
+                        🌡️ Температура: <b>12°C</b> (відчувається як 10°C)<br>
+                        💨 Вітер: <b>5.2 м/с</b><br>
+                        💧 Вологість: <b>78%</b>
+                    </div>
+                </div>
+
+                <div class="menu-item-card">
+                    <div class="btn-preview">📰 КиНовини</div>
+                    <h3>Агрегатор Новин</h3>
+                    <p>Збирає головні новини столиці з перевірених джерел. Дозволяє швидко переглянути заголовки та перейти до повної статті.</p>
+                </div>
+
+                <div class="menu-item-card">
+                    <div class="btn-preview">🔔 Тривога</div>
+                    <h3>Статус Повітряної Тривоги</h3>
+                    <p>Перевіряє актуальний статус тривоги в Києві через API мапи тривог. Надсилає сповіщення: 🟢 Відбій або 🔴 Тривога.</p>
+                </div>
+
+                <div class="menu-item-card">
+                    <div class="btn-preview">🍽 Рандомний ресторан</div>
+                    <h3>Гастро-Гід</h3>
+                    <p>Не знаєте де поїсти? Бот запропонує випадковий заклад з бази перевірених місць.</p>
+                    <ul>
+                        <li>📸 <strong>Фото:</strong> Надсилає реальне фото інтер'єру або страв.</li>
+                        <li>📍 <strong>Локація:</strong> Назва та адреса закладу.</li>
+                    </ul>
+                </div>
+
+                <div class="menu-item-card">
+                    <div class="btn-preview">🌳 Рандомний парк</div>
+                    <h3>Місця для Прогулянок</h3>
+                    <p>Знаходить затишні парки та сквери для відпочинку на свіжому повітрі.</p>
+                    <ul>
+                        <li>🌿 <strong>Природа:</strong> Фото парку для оцінки атмосфери.</li>
+                        <li>🎲 <strong>Рандом:</strong> Відкривайте нові куточки Києва щоразу.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="code-section">
+            <div class="section-head">
+                <h2>🛠 Технічна Реалізація (Codebase)</h2>
+                <p>Приклад реалізації парсингу графіків через Telethon. Це дозволяє обійти відсутність публічного API у ДТЕК.</p>
+            </div>
+            
+            <div class="code-window">
+                <div class="window-header">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <span class="filename">handlers/electricity_graphics.py</span>
+                </div>
+                <pre><code class="language-python">async def get_latest_kyiv_schedule() -> list[dict]:
+    # Ініціалізація клієнта Telethon (User-bot)
+    await client.start()
+    
+    # Отримуємо історію повідомлень каналу ДТЕК
+    messages = await client.get_messages("@dtek_ua", limit=40)
+    TARGET_PHRASE = "Київ: графіки відключень"
+
+    for msg in messages:
+        # Фільтрація за датою (не старіше 3 днів)
+        if msg.date < datetime.now(timezone.utc) - timedelta(days=3):
+            break
+        
+        # Пошук ключової фрази в тексті
+        if msg.message and TARGET_PHRASE.lower() in msg.message.lower():
+            if msg.photo:
+                # Завантаження актуального фото графіку
+                photo_path = await msg.download_media(
+                    file=f"electricity_graphics_images/schedule_latest.jpg"
+                )
+                return [{"photo": photo_path, "text": msg.message}]
+    
+    return [{"text": "✅ Наразі графіків відключень немає. Світло є!"}]</code></pre>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Developed by You &copy; 2025</p>
+    </footer>
+
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

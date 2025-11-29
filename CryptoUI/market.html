@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoBoard | Market</title>
+    <link rel="stylesheet" href="crypto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; color: #94a3b8; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 400; }
+        td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .coin-name { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+        .coin-name img { width: 24px; height: 24px; border-radius: 50%; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo"><i class="ri-bit-coin-line"></i> <span>CryptoBoard</span></div>
+            <nav class="menu">
+                <a href="crypto.html"><i class="ri-dashboard-line"></i> Dashboard</a>
+                <a href="wallet.html"><i class="ri-wallet-3-line"></i> Wallet</a>
+                <a href="exchange.html"><i class="ri-exchange-dollar-line"></i> Exchange</a>
+                <a href="market.html" class="active"><i class="ri-line-chart-line"></i> Market</a>
+                <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+            </nav>
+            <div class="logout"><a href="../index.html"><i class="ri-arrow-left-circle-line"></i> Back to Portfolio</a></div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h2>Market Overview</h2>
+                <div class="user-profile">
+                    <div class="notif-badge"><i class="ri-notification-3-line"></i><span class="dot"></span></div>
+                    <div class="dropdown-menu notif-dropdown">
+                        <div class="dropdown-header">Recent Notifications</div>
+                        <div class="notif-item">
+                            <div class="notif-icon green"><i class="ri-arrow-down-line"></i></div>
+                            <div class="notif-content"><p>Received 0.05 BTC</p><span>2 minutes ago</span></div>
+                        </div>
+                        <div class="notif-item">
+                            <div class="notif-icon blue"><i class="ri-shield-check-line"></i></div>
+                            <div class="notif-content"><p>Security check passed</p><span>1 hour ago</span></div>
+                        </div>
+                    </div>
+
+                    <div class="avatar"><img src="https://ui-avatars.com/api/?name=User+Name&background=3b82f6&color=fff" alt="User"></div>
+                    <div class="dropdown-menu profile-dropdown">
+                        <div class="dropdown-header">My Account</div>
+                        <a href="settings.html" class="menu-item"><i class="ri-user-settings-line"></i> Settings</a>
+                        <a href="#" class="menu-item"><i class="ri-customer-service-line"></i> Support</a>
+                        <div class="divider"></div>
+                        <a href="../index.html" class="menu-item logout"><i class="ri-logout-box-line"></i> Log Out</a>
+                    </div>
+                </div>
+            </header>
+
+            <div class="glass-panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Coin</th>
+                            <th>Price</th>
+                            <th>24h Change</th>
+                            <th>Market Cap</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><div class="coin-name"><i class="ri-bit-coin-fill" style="color: #f7931a;"></i> Bitcoin <span style="color: #94a3b8; font-size: 12px;">BTC</span></div></td>
+                            <td>$64,230.00</td>
+                            <td class="change positive">+2.4%</td>
+                            <td>$1.2T</td>
+                            <td><button style="padding: 5px 10px; background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: none; border-radius: 4px; cursor: pointer;">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><div class="coin-name"><i class="ri-eth-fill" style="color: #627eea;"></i> Ethereum <span style="color: #94a3b8; font-size: 12px;">ETH</span></div></td>
+                            <td>$3,450.00</td>
+                            <td class="change negative">-0.8%</td>
+                            <td>$400B</td>
+                            <td><button style="padding: 5px 10px; background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: none; border-radius: 4px; cursor: pointer;">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><div class="coin-name"><i class="ri-money-dollar-circle-fill" style="color: #26a17b;"></i> Tether <span style="color: #94a3b8; font-size: 12px;">USDT</span></div></td>
+                            <td>$1.00</td>
+                            <td class="change neutral">0.0%</td>
+                            <td>$83B</td>
+                            <td><button style="padding: 5px 10px; background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: none; border-radius: 4px; cursor: pointer;">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><div class="coin-name"><i class="ri-vip-diamond-line" style="color: #000000; background: white; border-radius: 50%;"></i> BNB <span style="color: #94a3b8; font-size: 12px;">BNB</span></div></td>
+                            <td>$245.00</td>
+                            <td class="change positive">+1.2%</td>
+                            <td>$38B</td>
+                            <td><button style="padding: 5px 10px; background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: none; border-radius: 4px; cursor: pointer;">Trade</button></td>
+                        </tr>
+                         <tr>
+                            <td>5</td>
+                            <td><div class="coin-name"><i class="ri-code-box-line" style="color: #14f195;"></i> Solana <span style="color: #94a3b8; font-size: 12px;">SOL</span></div></td>
+                            <td>$145.20</td>
+                            <td class="change positive">+5.1%</td>
+                            <td>$65B</td>
+                            <td><button style="padding: 5px 10px; background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: none; border-radius: 4px; cursor: pointer;">Trade</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="crypto.js"></script>
+</body>
+</html>

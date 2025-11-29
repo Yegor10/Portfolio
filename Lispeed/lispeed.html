@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lispeed | Ultimate Discord Moderator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0B1120;
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --card-border: rgba(148, 163, 184, 0.1);
+            --discord-blurple: #5865F2;
+            --discord-green: #57F287;
+            --discord-red: #ED4245;
+            --text-main: #F1F5F9;
+            --text-muted: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(88, 101, 242, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(87, 242, 135, 0.1) 0%, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-box {
+            width: 50px;
+            height: 50px;
+            background: var(--discord-blurple);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .brand h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: var(--text-main); }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .hero-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--discord-blurple);
+            position: relative;
+        }
+        
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--discord-blurple);
+            color: white;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4); }
+
+        .btn-outline {
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            background: rgba(255,255,255,0.05);
+        }
+        .btn-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.1); }
+
+        /* Feature Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--discord-blurple);
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--discord-blurple);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Code Section */
+        .install-section {
+            background: #0F172A;
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .install-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .install-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-window {
+            background: #1E293B;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .terminal-header {
+            background: #334155;
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #EF4444; }
+        .yellow { background: #F59E0B; }
+        .green { background: #10B981; }
+
+        .terminal-body {
+            padding: 2rem;
+            color: #E2E8F0;
+        }
+
+        .cmd {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .prompt { color: var(--discord-green); user-select: none; }
+        .command { color: #fff; }
+        
+        .copy-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+        .copy-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* Mockup UI */
+        .bot-preview {
+            background: #2f3136;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            font-family: 'Whitney', sans-serif;
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--discord-blurple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .msg-content h4 {
+            color: #fff;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .bot-tag {
+            background: var(--discord-blurple);
+            font-size: 0.6rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+        .msg-text {
+            color: #dcddde;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h2 { font-size: 2.5rem; }
+            .btn-group { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="header">
+            <div class="brand">
+                <div class="logo-box"><i class="fas fa-robot" style="color: white; font-size: 1.5rem;"></i></div>
+                <h1>Lispeed</h1>
+            </div>
+            <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Найкращий <br><span class="highlight">Модератор Діскорд</span></h2>
+                <p class="hero-desc">
+                    Lispeed - це просунутий бот-модератор, створений для захисту та автоматизації вашого серверу. 
+                    Використовує штучний інтелект для аналізу повідомлень та забезпечує миттєву реакцію на порушення.
+                </p>
+                <div class="btn-group">
+                    <a href="https://github.com/Yegor10/Lispeed" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-github"></i> View Repository
+                    </a>
+                    <a href="#install" class="btn btn-outline">
+                        <i class="fas fa-download"></i> Installation
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="bot-preview">
+                    <div class="message">
+                        <div class="avatar" style="background: #ED4245;"><i class="fas fa-user"></i></div>
+                        <div class="msg-content">
+                            <h4>SpammerUser <span style="color: #72767d; font-size: 0.8rem; font-weight: 400;">Today at 12:42 PM</span></h4>
+                            <p class="msg-text">BUY CHEAP CRYPTO NOW!!! CLICK HERE!!!</p>
+                        </div>
+                    </div>
+                    <div class="message">
+                        <div class="avatar"><i class="fas fa-robot"></i></div>
+                        <div class="msg-content">
+                            <h4>Lispeed <span class="bot-tag">BOT</span> <span style="color: #72767d; font-size: 0.8rem; font-weight: 400;">Today at 12:42 PM</span></h4>
+                            <div class="msg-text" style="background: #202225; padding: 10px; border-radius: 5px; border-left: 4px solid #ED4245;">
+                                <strong>🚫 Auto-Moderation</strong><br>
+                                User <strong>SpammerUser</strong> has been muted for 24h.<br>
+                                Reason: <em>Detected Spam/Scam pattern (AI Confidence: 98%)</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="feature-card">
+                <div class="icon-box"><i class="fas fa-brain"></i></div>
+                <h3>AI-Powered</h3>
+                <p>Інтелектуальний аналіз тексту для виявлення спаму, агресії та забороненого контенту з високою точністю.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                <h3>Disnake Framework</h3>
+                <p>Побудований на сучасній бібліотеці Disnake для Python 3.10+. Підтримка Slash-команд та асинхронність.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+                <h3>Smart Protection</h3>
+                <p>Вбудовані фільтри капсу (Caps Lock), антиспам системи та гнучке налаштування через JSON конфіги.</p>
+            </div>
+        </section>
+
+        <!-- Documentation Section -->
+        <section id="docs" style="margin-bottom: 6rem;">
+            <div class="install-header">
+                <h2>📚 Детальна Документація</h2>
+                <p style="color: var(--text-muted);">Повний опис функціоналу та команд бота</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 2rem;">
+                <!-- Sidebar Docs Navigation -->
+                <div class="docs-nav" style="background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--card-border); height: fit-content;">
+                    <h3 style="margin-bottom: 1rem; color: #fff; font-size: 1.2rem;">Modules</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="#mod" style="color: var(--text-muted); text-decoration: none; display: block; padding: 8px; border-radius: 6px; transition: 0.2s;" onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.color='var(--text-muted)'; this.style.background='transparent'"><i class="fas fa-gavel" style="width: 25px;"></i> Moderation</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#automod" style="color: var(--text-muted); text-decoration: none; display: block; padding: 8px; border-radius: 6px; transition: 0.2s;" onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.color='var(--text-muted)'; this.style.background='transparent'"><i class="fas fa-robot" style="width: 25px;"></i> Auto-Protection</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#utility" style="color: var(--text-muted); text-decoration: none; display: block; padding: 8px; border-radius: 6px; transition: 0.2s;" onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.color='var(--text-muted)'; this.style.background='transparent'"><i class="fas fa-tools" style="width: 25px;"></i> Utility & Info</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#fun" style="color: var(--text-muted); text-decoration: none; display: block; padding: 8px; border-radius: 6px; transition: 0.2s;" onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.color='var(--text-muted)'; this.style.background='transparent'"><i class="fas fa-gamepad" style="width: 25px;"></i> Entertainment</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#levels" style="color: var(--text-muted); text-decoration: none; display: block; padding: 8px; border-radius: 6px; transition: 0.2s;" onmouseover="this.style.color='#fff'; this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.color='var(--text-muted)'; this.style.background='transparent'"><i class="fas fa-layer-group" style="width: 25px;"></i> Leveling</a></li>
+                    </ul>
+                </div>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    
+                    <!-- Moderation -->
+                    <div id="mod" style="margin-bottom: 3rem;">
+                        <h3 style="color: var(--discord-blurple); font-size: 1.8rem; margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 10px;">Moderation System</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Потужний набір інструментів для керування сервером та покарання порушників. Всі команди використовують Slash-інтерфейс.</p>
+                        
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--discord-red);">
+                                <code style="color: #fff; font-weight: bold; font-size: 1.1rem;">/ban [member] [reason]</code>
+                                <p style="margin-top: 5px; color: var(--text-muted); font-size: 0.9rem;">Перманентне блокування користувача на сервері.</p>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--discord-red);">
+                                <code style="color: #fff; font-weight: bold; font-size: 1.1rem;">/kick [member] [reason]</code>
+                                <p style="margin-top: 5px; color: var(--text-muted); font-size: 0.9rem;">Вигнання користувача з можливістю повернення.</p>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid #F59E0B;">
+                                <code style="color: #fff; font-weight: bold; font-size: 1.1rem;">/mute [member] [time] [reason]</code>
+                                <p style="margin-top: 5px; color: var(--text-muted); font-size: 0.9rem;">Тимчасове обмеження можливості писати. Час вказується у форматі: 10m, 2h, 1d.</p>
+                            </div>
+                             <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid #F59E0B;">
+                                <code style="color: #fff; font-weight: bold; font-size: 1.1rem;">/warn [member] [reason]</code>
+                                <p style="margin-top: 5px; color: var(--text-muted); font-size: 0.9rem;">Видача попередження. Система веде облік активних попереджень (/warns).</p>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--discord-green);">
+                                <code style="color: #fff; font-weight: bold; font-size: 1.1rem;">/unmute /unwarn /unlock</code>
+                                <p style="margin-top: 5px; color: var(--text-muted); font-size: 0.9rem;">Команди для зняття обмежень.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Auto Mod -->
+                    <div id="automod" style="margin-bottom: 3rem;">
+                        <h3 style="color: var(--discord-green); font-size: 1.8rem; margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 10px;">Auto-Protection</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Автоматичні системи захисту, що працюють 24/7 без участі модераторів.</p>
+                        
+                        <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                            <h4 style="color: #fff; margin-bottom: 10px;">🚫 Anti-Spam System</h4>
+                            <p style="color: var(--text-muted); margin-bottom: 10px;">Алгоритм: <strong>5 повідомлень за 5 секунд</strong>.</p>
+                            <p style="color: var(--text-muted);">Якщо користувач перевищує ліміт, бот:</p>
+                            <ul style="margin-left: 20px; color: var(--text-muted); margin-top: 5px;">
+                                <li>Автоматично видаляє спам-повідомлення</li>
+                                <li>Видає мут на 10 секунд</li>
+                                <li>Відправляє попередження в чат</li>
+                            </ul>
+                            <code style="display: block; margin-top: 10px; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 4px;">/antispam [on/off]</code>
+                        </div>
+
+                        <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                            <h4 style="color: #fff; margin-bottom: 10px;">📢 Caps Filter</h4>
+                            <p style="color: var(--text-muted);">Блокує повідомлення, що містять понад <strong>70% великих літер</strong>.</p>
+                             <code style="display: block; margin-top: 10px; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 4px;">/caps_filter [on/off]</code>
+                        </div>
+
+                         <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 10px;">
+                            <h4 style="color: #fff; margin-bottom: 10px;">🤬 Bad Words Filter</h4>
+                            <p style="color: var(--text-muted);">Динамічний список заборонених слів, який налаштовується адміністратором.</p>
+                             <code style="display: block; margin-top: 10px; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 4px;">/badwords_add [word], /badwords_list</code>
+                        </div>
+                    </div>
+
+                    <!-- Utility -->
+                    <div id="utility" style="margin-bottom: 3rem;">
+                        <h3 style="color: #3B82F6; font-size: 1.8rem; margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 10px;">Utility & Info</h3>
+                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                                <code style="color: #fff;">/user_info [user]</code>
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px;">Повна інформація про акаунт, дату реєстрації та ролі.</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                                <code style="color: #fff;">/guild_info</code>
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px;">Статистика серверу: учасники, канали, рівень бусту.</p>
+                            </div>
+                             <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                                <code style="color: #fff;">/avatar [user]</code>
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px;">Отримати аватар користувача у високій якості.</p>
+                            </div>
+                             <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                                <code style="color: #fff;">/audit_setchannel</code>
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px;">Налаштування каналу для логування дій модераторів.</p>
+                            </div>
+                         </div>
+                    </div>
+
+                    <!-- Entertainment -->
+                    <div id="fun" style="margin-bottom: 3rem;">
+                        <h3 style="color: #F472B6; font-size: 1.8rem; margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 10px;">Entertainment</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Соціальні команди для взаємодії учасників. Використовують рандомні GIF-анімації.</p>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/hug</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/kiss</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/punch</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/dance</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/highfive</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/cry</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/laugh</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/sleep</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/eat</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/run</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/fly</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/magic</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/sing</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/meow</span>
+                            <span style="background: rgba(244, 114, 182, 0.1); color: #F472B6; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem;">/woof</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation -->
+        <section id="install" class="install-section">
+            <div class="install-header">
+                <h2>🚀 Як встановити</h2>
+                <p style="color: var(--text-muted);">Слідуйте цим крокам, щоб запустити бота на своєму сервері</p>
+            </div>
+
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-body">
+                    <div class="cmd">
+                        <span class="prompt">user@pc:~$</span>
+                        <span class="command">git clone https://github.com/Yegor10/Lispeed.git</span>
+                    </div>
+                    <div class="cmd">
+                        <span class="prompt">user@pc:~$</span>
+                        <span class="command">cd Lispeed</span>
+                    </div>
+                    <div class="cmd">
+                        <span class="prompt">user@pc:~/Lispeed$</span>
+                        <span class="command">pip install -r requirements.txt</span>
+                    </div>
+                    <div class="cmd">
+                        <span class="prompt">user@pc:~/Lispeed$</span>
+                        <span class="command">python main.py</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Не забудьте налаштувати <code>.env</code> та токен бота!</p>
+                <a href="https://github.com/Yegor10/Lispeed" target="_blank" class="btn btn-primary">Перейти до Репозиторію</a>
+            </div>
+        </section>
+
+        <footer style="margin-top: 4rem; text-align: center; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 2rem;">
+            <p>© 2025 Lispeed Bot by Yegor10</p>
+        </footer>
+
+    </div>
+</body>
+</html>

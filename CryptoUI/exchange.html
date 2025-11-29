@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoBoard | Exchange</title>
+    <link rel="stylesheet" href="crypto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .swap-box { display: flex; flex-direction: column; gap: 20px; }
+        .input-group { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .input-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .input-row input { background: transparent; border: none; color: white; font-size: 24px; width: 60%; outline: none; }
+        .token-select { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; cursor: pointer; }
+        .swap-btn { width: 100%; padding: 15px; background: #3b82f6; border: none; border-radius: 12px; color: white; font-size: 18px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        .swap-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+        .swap-icon { align-self: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 50%; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo"><i class="ri-bit-coin-line"></i> <span>CryptoBoard</span></div>
+            <nav class="menu">
+                <a href="crypto.html"><i class="ri-dashboard-line"></i> Dashboard</a>
+                <a href="wallet.html"><i class="ri-wallet-3-line"></i> Wallet</a>
+                <a href="exchange.html" class="active"><i class="ri-exchange-dollar-line"></i> Exchange</a>
+                <a href="market.html"><i class="ri-line-chart-line"></i> Market</a>
+                <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+            </nav>
+            <div class="logout"><a href="../index.html"><i class="ri-arrow-left-circle-line"></i> Back to Portfolio</a></div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h2>Quick Swap</h2>
+                <div class="user-profile">
+                    <div class="notif-badge"><i class="ri-notification-3-line"></i><span class="dot"></span></div>
+                    <div class="dropdown-menu notif-dropdown">
+                        <div class="dropdown-header">Recent Notifications</div>
+                        <div class="notif-item">
+                            <div class="notif-icon green"><i class="ri-arrow-down-line"></i></div>
+                            <div class="notif-content"><p>Received 0.05 BTC</p><span>2 minutes ago</span></div>
+                        </div>
+                        <div class="notif-item">
+                            <div class="notif-icon blue"><i class="ri-shield-check-line"></i></div>
+                            <div class="notif-content"><p>Security check passed</p><span>1 hour ago</span></div>
+                        </div>
+                    </div>
+
+                    <div class="avatar"><img src="https://ui-avatars.com/api/?name=User+Name&background=3b82f6&color=fff" alt="User"></div>
+                    <div class="dropdown-menu profile-dropdown">
+                        <div class="dropdown-header">My Account</div>
+                        <a href="settings.html" class="menu-item"><i class="ri-user-settings-line"></i> Settings</a>
+                        <a href="#" class="menu-item"><i class="ri-customer-service-line"></i> Support</a>
+                        <div class="divider"></div>
+                        <a href="../index.html" class="menu-item logout"><i class="ri-logout-box-line"></i> Log Out</a>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-grid" style="grid-template-columns: 1.5fr 1fr;">
+                <div class="glass-panel">
+                     <div class="section-header"><h3>Swap Tokens</h3></div>
+                     <div class="swap-box">
+                         <div class="input-group">
+                             <div class="input-row">
+                                 <span>You Pay</span>
+                                 <span>Balance: 1.24 BTC</span>
+                             </div>
+                             <div class="input-row">
+                                 <input type="number" value="0.5">
+                                 <div class="token-select"><i class="ri-bit-coin-fill" style="color: #f7931a;"></i> BTC <i class="ri-arrow-down-s-line"></i></div>
+                             </div>
+                         </div>
+                         
+                         <div class="swap-icon"><i class="ri-arrow-up-down-line"></i></div>
+
+                         <div class="input-group">
+                             <div class="input-row">
+                                 <span>You Receive</span>
+                                 <span>~ $32,150</span>
+                             </div>
+                             <div class="input-row">
+                                 <input type="number" value="32150">
+                                 <div class="token-select"><i class="ri-money-dollar-circle-fill" style="color: #26a17b;"></i> USDT <i class="ri-arrow-down-s-line"></i></div>
+                             </div>
+                         </div>
+
+                         <div style="display: flex; justify-content: space-between; font-size: 14px; color: #94a3b8; padding: 0 10px;">
+                             <span>Exchange Rate</span>
+                             <span>1 BTC = 64,300 USDT</span>
+                         </div>
+
+                         <button class="swap-btn">Swap Now</button>
+                     </div>
+                </div>
+
+                <div class="glass-panel">
+                    <div class="section-header"><h3>Recent Swaps</h3></div>
+                    <div class="asset-list">
+                        <div class="asset-item">
+                            <div class="asset-info"><h4>BTC &rarr; ETH</h4><span>0.1 BTC to 1.5 ETH</span></div>
+                            <div class="asset-price"><span class="change positive">Completed</span></div>
+                        </div>
+                        <div class="asset-item">
+                            <div class="asset-info"><h4>SOL &rarr; USDT</h4><span>20 SOL to 2900 USDT</span></div>
+                            <div class="asset-price"><span class="change positive">Completed</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="crypto.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+:root {
+    --bg-dark: #0f172a;
+    --bg-sidebar: #1e293b;
+    --bg-card: #1e293b;
+    --accent: #3b82f6;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: rgba(255,255,255,0.1);
+    --success: #10b981;
+    --warning: #f59e0b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.6;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 100;
+}
+
+.back-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.back-link:hover { color: var(--accent); }
+
+.project-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.doc-container {
+    display: flex;
+    min-height: 100vh;
+    padding-top: 60px;
+}
+
+.doc-sidebar {
+    width: 250px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    height: calc(100vh - 60px);
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.doc-sidebar h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.doc-sidebar ul { list-style: none; }
+.doc-sidebar li { margin-bottom: 10px; }
+.doc-sidebar a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 14px;
+    transition: 0.2s;
+    display: block;
+    padding: 5px 0;
+}
+.doc-sidebar a:hover { color: var(--accent); padding-left: 5px; }
+
+.doc-content {
+    margin-left: 250px;
+    padding: 50px 60px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.doc-section {
+    margin-bottom: 60px;
+    scroll-margin-top: 80px;
+}
+
+h1 { font-size: 2.5rem; margin-bottom: 15px; }
+h2 { font-size: 1.8rem; margin-bottom: 20px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+h3 { font-size: 1.3rem; margin-bottom: 15px; margin-top: 20px; }
+p { margin-bottom: 15px; color: var(--text-muted); }
+.lead { font-size: 1.1rem; color: var(--text-main); }
+
+.status-badges { display: flex; gap: 10px; margin-top: 20px; }
+.badge { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.success { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.info { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+.warning { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.card { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); }
+.card ul { padding-left: 20px; color: var(--text-muted); margin-top: 10px; }
+
+.code-block {
+    background: #282c34;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+.code-header {
+    background: #21252b;
+    padding: 8px 15px;
+    font-size: 12px;
+    color: #9da5b4;
+    font-family: monospace;
+}
+pre { margin: 0; padding: 15px; }
+code { font-family: 'Fira Code', monospace; font-size: 14px; }
+
+.doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+.doc-table th, .doc-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.doc-table th { color: var(--accent); }
+.doc-table code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; }
+
+.file-tree {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font-family: 'Fira Code', monospace;
+    color: var(--text-muted);
+}
+
+.doc-footer {
+    margin-top: 100px;
+    border-top: 1px solid var(--border);
+    padding-top: 30px;
+    text-align: center;
+    font-size: 12px;
+}
+
+@media (max-width: 900px) {
+    .doc-sidebar { display: none; }
+    .doc-content { margin-left: 0; padding: 30px; }
+    .grid-2 { grid-template-columns: 1fr; }
+}

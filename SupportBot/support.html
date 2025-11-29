@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | Telegram Support Bot</title>
+    <link rel="stylesheet" href="support.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="back-link"><i class="ri-arrow-left-line"></i> Back to Portfolio</a>
+        <div class="project-tag">v1.0.0 Documentation</div>
+    </nav>
+
+    <div class="doc-container">
+        <aside class="doc-sidebar">
+            <h3>Зміст</h3>
+            <ul>
+                <li><a href="#intro">Вступ</a></li>
+                <li><a href="#features">Функціонал</a></li>
+                <li><a href="#tech-stack">Технічний стек</a></li>
+                <li><a href="#database">База Даних</a></li>
+                <li><a href="#commands">Команди</a></li>
+                <li><a href="#structure">Структура Проекту</a></li>
+            </ul>
+        </aside>
+
+        <main class="doc-content">
+            
+            <section id="intro" class="doc-section">
+                <h1>Telegram Support Bot System</h1>
+                <p class="lead">
+                    Асинхронний Telegram-бот для автоматизації служби технічної підтримки. 
+                    Дозволяє користувачам створювати тікети, а операторам обробляти їх у спільному середовищі з розподілом навантаження.
+                </p>
+                <div class="status-badges">
+                    <span class="badge success">Stable</span>
+                    <span class="badge info">Open Source</span>
+                    <span class="badge warning">Python 3.10+</span>
+                </div>
+            </section>
+
+            <section id="features" class="doc-section">
+                <h2>🚀 Основний Функціонал</h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>👤 Для Користувача</h3>
+                        <ul>
+                            <li>Створення заявки однією командою.</li>
+                            <li>Відстеження статусу заявки.</li>
+                            <li>Прямий діалог з оператором через бота.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>👨‍💻 Для Оператора</h3>
+                        <ul>
+                            <li><strong>Ticket Claiming:</strong> Система "захоплення" заявки (/take_id) для уникнення дублювання відповідей.</li>
+                            <li><strong>Queue:</strong> Перегляд черги відкритих тікетів.</li>
+                            <li><strong>Stats:</strong> Аналітика виконаної роботи.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tech-stack" class="doc-section">
+                <h2>🛠 Технічний Стек</h2>
+                <ul>
+                    <li><strong>Core:</strong> Python 3.10+, <code>asyncio</code></li>
+                    <li><strong>Framework:</strong> <a href="#">aiogram 3.x</a> (Routers, Dispatcher, Webhook/Polling)</li>
+                    <li><strong>Database:</strong> SQLite + <code>aiosqlite</code> (для неблокуючих запитів)</li>
+                    <li><strong>State Management:</strong> Aiogram FSM (Finite State Machine)</li>
+                </ul>
+            </section>
+
+            <section id="database" class="doc-section">
+                <h2>💾 Структура Бази Даних</h2>
+                <p>Використовується таблиця <code>tickets</code> для зберігання всіх звернень.</p>
+                <div class="code-block">
+                    <div class="code-header">SQL Schema</div>
+                    <pre><code class="language-sql">CREATE TABLE IF NOT EXISTS tickets (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    username TEXT,
+    issue TEXT NOT NULL,
+    status TEXT DEFAULT 'open', -- 'open', 'in_progress', 'closed'
+    operator_id INTEGER DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+                </div>
+            </section>
+
+            <section id="commands" class="doc-section">
+                <h2>🎮 Список Команд</h2>
+                
+                <h3>User Commands</h3>
+                <table class="doc-table">
+                    <tr>
+                        <th>Команда</th>
+                        <th>Опис</th>
+                    </tr>
+                    <tr>
+                        <td><code>/start</code></td>
+                        <td>Привітання та інструкція.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/ticket</code></td>
+                        <td>Почати процес створення нової заявки (запуск FSM).</td>
+                    </tr>
+                </table>
+
+                <h3>Operator Commands</h3>
+                <table class="doc-table">
+                    <tr>
+                        <th>Команда</th>
+                        <th>Опис</th>
+                    </tr>
+                    <tr>
+                        <td><code>/admin</code></td>
+                        <td>Відкрити панель адміністратора.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/list</code></td>
+                        <td>Показати список всіх відкритих тікетів (ID, Користувач, Проблема).</td>
+                    </tr>
+                    <tr>
+                        <td><code>/take_{id}</code></td>
+                        <td>Взяти тікет в роботу. Бот переходить в режим діалогу з конкретним користувачем.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/stats</code></td>
+                        <td>Показати загальну статистику (всього/закрито).</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section id="structure" class="doc-section">
+                <h2>📂 Структура Проекту</h2>
+                <pre class="file-tree">
+📦 support-bot
+ ┣ 📂 handlers
+ ┃ ┣ 📜 admin.py     # Логіка операторів (list, take, reply)
+ ┃ ┣ 📜 user.py      # Логіка користувачів (create ticket)
+ ┃ ┗ 📜 __init__.py
+ ┣ 📜 bot.py         # Точка входу (Entry point)
+ ┣ 📜 config.py      # Налаштування
+ ┣ 📜 database.py    # Асинхронні запити до SQLite
+ ┗ 📜 requirements.txt
+                </pre>
+            </section>
+            
+            <footer class="doc-footer">
+                <p>&copy; 2025 Support Bot Documentation. Created by Solan5.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
